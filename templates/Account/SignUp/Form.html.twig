@@ -1,0 +1,64 @@
+{% extends 'Layouts/Default.html.twig' %}
+
+{% block heading %}New User Sign Up{% endblock heading %}
+
+{% block instructions%}Please complete the following fields{% endblock instructions %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('Pages/Account/SignUp') }}
+    <script>
+      SQRL.setLoginLinkAnchorTagId('sqrlLoginLink');
+      SQRL.setLoginQrCodeImageTagId('sqrlLoginQrCode');
+      SQRL.setSspApiUri('');
+      SQRL.init(window, window.docReady);
+    </script>
+{% endblock %}
+
+{% block body %}
+  {{ parent() }}
+  <form action="{{ submitUri }}" method="get">
+    <div class="form-group">
+      <label for="usernameField">Username</label>
+      <input type="text" class="form-control" name="usernameField" id="usernameField" aria-describedby="usernameHelp" placeholder="Enter desired username">
+      <small id="usernameHelp" class="form-text text-muted">A unique name to identify you from other users.</small>
+    </div>
+    <div class="form-group">
+      <label for="emailField">Email</label>
+      <input type="text" class="form-control" name="emailField" id="emailField" aria-describedby="emailHelp" placeholder="Enter desired email">
+      <small id="emailHelp" class="form-text text-muted">To ensure you can recover your account and receive notifications. We do not share email addresses with third-parties.</small>
+    </div>
+    <label for="authenticationMethod">How would you like to authenticate?</label>
+    <input type="hidden" name="authenticationMethod" value="sqrl">
+    <div class="ml-0 mr-0 mt-1 mb-1 p-0 d-flex flex-row justify-content-around align-content-start" id="authenticationMethod">
+      <div class="d-inline-flex p-2 flex-column border w-50 border-info" id="authenticateByPassword" data-select-auth="password">
+        <label class="text-center" for="authenticateByPassword">Use a traditional Password</label>
+        <div class="form-group">
+          <label for="passwordField1">Password</label>
+          <input type="password" class="form-control" id="passwordField1" name="passwordField1" placeholder="Password" aria-describedby="passwordHelp1">
+          <small id="passwordHelp1" class="form-text text-muted">A mix of characters, numbers and symbols at least 12 characters log. Too hard to remember? Do it like the pros and use <a href="https://www.lastpass.com/how-lastpass-works">LastPass</a>.</small>
+        </div>
+        <div class="form-group">
+          <label for="passwordField2">Verify Password</label>
+          <input type="password" class="form-control" id="passwordField2" name="passwordField2" placeholder="Password" aria-describedby="passwordHelp2">
+          <small id="passwordHelp2" class="form-text text-muted">Please type your password again to be sure it is the right one</small>
+        </div>
+      </div>
+      <div class="d-inline-flex p-2 flex-column border w-50 border-info" id="authenticateBySqrl" data-select-auth="sqrl">
+        <label class="text-center" for="authenticateBySqrl">Safer and Easier with SQRL</label>
+      </div>
+    </div>
+{#    <p class="lead">How would you like to authenticate?</p>#}
+{#    <div class="container-fluid d-flex flex-row">#}
+{#      <div class="d-flex flex-column">#}
+
+{#        <p class="text-center">Traditional</p>#}
+
+{#      </div>#}
+{#      <div class="d-flex flex-column">#}
+{#        <p class="text-center">Use SQRL</p>#}
+{#      </div>#}
+{#    </div>#}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}

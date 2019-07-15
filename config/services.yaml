@@ -25,3 +25,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    app.cache.adapter:
+        class: Symfony\Component\Cache\Adapter\AdapterInterface
+        factory: [Symfony\Component\Cache\Adapter\RedisAdapter, createConnection]
+        arguments: ['redis://cachehost.sqrl:6379']
+
+    App.Doctrine.CamelCaseNamingStrategy:
+        class: App\Doctrine\CamelCaseNamingStrategy

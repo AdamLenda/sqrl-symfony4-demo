@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('Layouts/Default') }}
+
+        <!-- Renders a link tag (if your module requires any CSS)
+             <link rel="stylesheet" href="/build/app.css"> -->
+    {% endblock %}
+</head>
+<body>
+
+<header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-primary">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="btn btn-primary" href="#">Home</a>
+
+            </li>
+
+            <li class="nav-item">
+                <a class="btn btn-primary" href="{{ url('LogInForm') }}">Log In</a>
+
+            </li>
+
+            <li class="nav-item">
+                <form action="{{ url('LogOut') }}" method="post">
+                    <button class="btn btn-primary" type="submit">Log Out</button>
+                </form>
+
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="{{ url('SignUp') }}">Sign Up</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{#        <div class="container-fluid">#}
+{#            <h1>#}
+{#            {% block header %}#}
+{#                {{ header|default("No Header Defined") }}#}
+{#            {% endblock %}#}
+{#            </h1>#}
+{#        </div>#}
+
+<main role="main" class="container">
+    <h1>{% block heading %}Nameless Web Page{% endblock heading %}</h1>
+    <p class="lead">{% block instructions%}{% endblock instructions %}</p>
+    {% block body %}{% endblock body %}
+</main>
+
+
+{% block javascript %}
+    {{ encore_entry_script_tags('app') }}
+
+    <!-- Renders app.js & a webpack runtime.js file
+        <script src="/build/runtime.js"></script>
+        <script src="/build/app.js"></script> -->
+    {{ encore_entry_script_tags('Layouts/Default') }}
+{% endblock %}
+</body>
+</html>
